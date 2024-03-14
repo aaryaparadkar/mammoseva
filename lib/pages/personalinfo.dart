@@ -9,32 +9,32 @@ class PersonalInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Personal Information'),
+        title: const Text('Personal Information'),
         centerTitle: true,
-        backgroundColor: Color(0XFFEFB4C8),
+        backgroundColor: const Color(0XFFEFB4C8),
       ),
-      backgroundColor: Color(0XFFEFB4C8),
+      backgroundColor: const Color(0XFFEFB4C8),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Stack(
             alignment: Alignment.bottomRight,
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/pfp.jpg'),
               ),
               IconButton(
-                icon: Icon(Icons.edit),
+                icon: const Icon(Icons.edit),
                 onPressed: () {
                   // Handle edit button tap
                 },
               ),
             ],
           ),
-          SizedBox(height: 20),
-          Padding(
+          const SizedBox(height: 20),
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -47,22 +47,22 @@ class PersonalInfo extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: ListTile(
-              title: Text('Sneha'),
+              title: const Text('Sneha'),
               onTap: () {
                 // Handle name tap
               },
             ),
           ),
-          SizedBox(height: 20),
-          Padding(
+          const SizedBox(height: 20),
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -75,22 +75,22 @@ class PersonalInfo extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: ListTile(
-              title: Text('sneha@gmail.com'),
+              title: const Text('sneha@gmail.com'),
               onTap: () {
                 // Handle email tap
               },
             ),
           ),
-          SizedBox(height: 20),
-          Padding(
+          const SizedBox(height: 20),
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -103,35 +103,37 @@ class PersonalInfo extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: ListTile(
-              title: Text('January 1, 2023'),
+              title: const Text('January 1, 2023'),
               onTap: () {
                 // Handle periods date tap
               },
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // Handle edit profile button tap
             },
-            child: Text('Edit Profile'),
+            child: const Text('Edit Profile'),
           ),
         ],
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        backgroundColor: Color(0XFFFF55AB),
+        backgroundColor: const Color(0XFFFF55AB),
         icons: [Icons.book, Icons.home, Icons.person],
         activeIndex: 0,
         activeColor: Colors.white,
         inactiveColor: Colors.white,
+        iconSize: 30, // Adjust the icon size as needed
+        gapLocation: GapLocation.none, // Keep icons centered
         onTap: (index) {
           switch (index) {
             case 0:

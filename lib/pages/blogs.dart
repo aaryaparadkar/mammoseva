@@ -266,11 +266,13 @@ class Blogs extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        backgroundColor: const Color(0XFFFF55AB),
-        icons: const [Icons.book, Icons.home, Icons.person],
+        backgroundColor: Color(0XFFFF55AB),
+        icons: [Icons.book, Icons.home, Icons.person],
         activeIndex: 0,
         activeColor: Colors.white,
         inactiveColor: Colors.white,
+        iconSize: 30, // Adjust the icon size as needed
+        gapLocation: GapLocation.none, // Keep icons centered
         onTap: (index) {
           switch (index) {
             case 0:

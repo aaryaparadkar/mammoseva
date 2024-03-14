@@ -14,9 +14,11 @@ class Profile extends StatelessWidget {
       appBar: AppBar(
         title: Text('Profile'),
         centerTitle: true,
-        backgroundColor: Color(0XFFEFB4C8), // Set the background color for the AppBar
+        backgroundColor:
+            Color(0XFFEFB4C8), // Set the background color for the AppBar
       ),
-      backgroundColor: Color(0XFFEFB4C8), // Set the background color for the entire page
+      backgroundColor:
+          Color(0XFFEFB4C8), // Set the background color for the entire page
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -46,9 +48,11 @@ class Profile extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.0), // Add gap from left and right
+            margin: EdgeInsets.symmetric(
+                horizontal: 16.0), // Add gap from left and right
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 235, 150, 178), // Set background color for the container
+              color: Color.fromARGB(
+                  255, 235, 150, 178), // Set background color for the container
               borderRadius: BorderRadius.circular(10.0), // Add rounded borders
             ),
             child: ListTile(
@@ -66,9 +70,11 @@ class Profile extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.0), // Add gap from left and right
+            margin: EdgeInsets.symmetric(
+                horizontal: 16.0), // Add gap from left and right
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 235, 150, 178), // Set background color for the container
+              color: Color.fromARGB(
+                  255, 235, 150, 178), // Set background color for the container
               borderRadius: BorderRadius.circular(10.0), // Add rounded borders
             ),
             child: ListTile(
@@ -86,9 +92,11 @@ class Profile extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.0), // Add gap from left and right
+            margin: EdgeInsets.symmetric(
+                horizontal: 16.0), // Add gap from left and right
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 235, 150, 178), // Set background color for the container
+              color: Color.fromARGB(
+                  255, 235, 150, 178), // Set background color for the container
               borderRadius: BorderRadius.circular(10.0), // Add rounded borders
             ),
             child: ListTile(
@@ -111,9 +119,11 @@ class Profile extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 20),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => Intro())
-                    );// Handle logout button tap
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Intro())); // Handle logout button tap
                   },
                   child: Text('Logout'),
                 ),
@@ -128,6 +138,8 @@ class Profile extends StatelessWidget {
         activeIndex: 0,
         activeColor: Colors.white,
         inactiveColor: Colors.white,
+        iconSize: 30, // Adjust the icon size as needed
+        gapLocation: GapLocation.none, // Keep icons centered
         onTap: (index) {
           switch (index) {
             case 0:

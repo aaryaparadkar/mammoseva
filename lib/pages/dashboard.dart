@@ -13,10 +13,8 @@ class Dashboard extends StatelessWidget {
       ),
       body: ElevatedButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SelfExamination())
-          );
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SelfExamination()));
         },
         child: Text('Self Examination'),
       ),
@@ -26,6 +24,8 @@ class Dashboard extends StatelessWidget {
         activeIndex: 0,
         activeColor: Colors.white,
         inactiveColor: Colors.white,
+        iconSize: 30, // Adjust the icon size as needed
+        gapLocation: GapLocation.none, // Align icons in the center
         onTap: (index) {
           switch (index) {
             case 0:
