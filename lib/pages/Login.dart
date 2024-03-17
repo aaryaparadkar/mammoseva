@@ -9,6 +9,7 @@ void main() {
   ));
 }
 
+// ignore: use_key_in_widget_constructors
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,7 @@ class Login extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               const TextField(
-                // ignore: unnecessary_const
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),

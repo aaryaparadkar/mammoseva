@@ -3,9 +3,11 @@ import 'package:test_app/pages/dashboard.dart';
 import 'package:test_app/pages/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Blogs extends StatelessWidget {
+  get youtubeUrls => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,77 +34,112 @@ class Blogs extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 20),
-
           const Padding(
-            padding: EdgeInsets.only(
-                left: 20.0), // Add padding to the left of the title
+            padding: EdgeInsets.only(left: 20.0),
             child: Text(
-              'Blogs',
+              'Blogs & Survivor Stories',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.normal,
               ),
             ),
           ),
-          const SizedBox(height: 20), // Add space between content and list
+          const SizedBox(height: 20),
           Expanded(
             child: ListView.separated(
-              separatorBuilder: (context, index) =>
-                  const SizedBox(height: 20), // Add space between list tiles
-              itemCount: 3,
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
+              itemCount: 6, // Combine the count for blogs and survivor stories
 
               itemBuilder: (context, index) {
-                // Define the titles for each ListTile
                 List<String> titles = [
                   "Meet Rina: A Stage 2 Breast Cancer Survivor from India",
                   "Breast cancer: 'I am a stronger person today'",
                   "Breast cancer survivor finds new calling as a well-being coach in India",
+                  "3 Breast Cancer Survivors Share Their Stories",
+                  "Mrs. Jumana shares her survival story",
+                  "2 time Breast Cancer Survivor, Ms. Arti shares her story",
                 ];
 
                 List<String> subtitles = [
                   "Rina: Stage 2",
                   "Simran: HER2-Positive",
                   "Shreshta: Stage 3",
+                  "Mayo Clinic",
+                  "Manipal Hospitals",
+                  "Sahyadri Hospitals",
                 ];
 
                 List<String> imagePaths = [
                   "assets/logob1.png",
                   "assets/logob1.png",
                   "assets/logob3.png",
+                  "assets/survivor1.jpg",
+                  "assets/survivor2.jpg",
+                  "assets/survivor3.jpg",
                 ];
 
-                return Container(
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-
-                    color: const Color(0xFFFFCFDF), // Set background color
-                  ),
-                  child: ListTile(
-                    title: Text(titles[index]), // Set title based on index
-                    subtitle: Text(subtitles[index]),
-                    leading: ClipOval(
-                      child: Image.asset(
-                        imagePaths[
-                            index], // Set path of the image in the assets folder
-                        width: 40, // Set width of the image
-                        height: 40, // Set height of the image
+                if (index < 3) {
+                  // Display blogs
+                  return Container(
+                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xFFFFCFDF),
+                    ),
+                    child: ListTile(
+                      title: Text(titles[index]),
+                      subtitle: Text(subtitles[index]),
+                      leading: ClipOval(
+                        child: Image.asset(
+                          imagePaths[index],
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
-                    ), // Example icon // Example icon
-                    trailing: const Icon(Icons.arrow_forward), // Example icon
-                    onTap: () {
-                      // Action when ListTile is tapped
-                    },
-                  ),
-                );
+                      trailing: const Icon(Icons.arrow_forward),
+                      onTap: () {
+                        // Action when ListTile is tapped
+                      },
+                    ),
+                  );
+                } else if (index < 6) {
+                  // Display survivor stories
+                  return Container(
+                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xFFFFCFDF),
+                    ),
+                    child: ListTile(
+                      title: Text(titles[index]),
+                      subtitle: Text(subtitles[index]),
+                      leading: ClipOval(
+                        child: Image.asset(
+                          imagePaths[index],
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                      trailing: InkWell(
+                        onTap: () async {
+                          final url = youtubeUrls[index];
+                          if (await canLaunch(url)) {
+                            await launch(url);
+                          } else {
+                            throw 'Could not launch $url';
+                          }
+                        },
+                        child: const Icon(Icons.arrow_forward),
+                      ),
+                    ),
+                  );
+                }
               },
             ),
           ),
           const SizedBox(height: 20),
           const Padding(
-            padding: EdgeInsets.only(
-                left: 20.0), // Add padding to the left of the title
-            // Add padding to the left of the title
+            padding: EdgeInsets.only(left: 20.0),
             child: Text(
               'Podcasts',
               style: TextStyle(
@@ -111,16 +148,12 @@ class Blogs extends StatelessWidget {
               ),
             ),
           ),
-
-          // Podcasts
-          const SizedBox(height: 20), // Add space between content and list
+          const SizedBox(height: 20),
           Expanded(
             child: ListView.separated(
-              separatorBuilder: (context, index) =>
-                  const SizedBox(height: 10), // Add space between list tiles
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemCount: 3,
               itemBuilder: (context, index) {
-                // Define the titles for each ListTile
                 List<String> titles = [
                   "The Breast Cancer Podcast",
                   "The Breast Cancer Recovery Coach",
@@ -149,114 +182,28 @@ class Blogs extends StatelessWidget {
                   margin: const EdgeInsets.only(left: 20, right: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromARGB(
-                        255, 255, 255, 255), // Set background color
+                    color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                   child: ListTile(
-                    title: Text(titles[index]), // Set title based on index
+                    title: Text(titles[index]),
                     subtitle: Text(subtitles[index]),
                     leading: ClipOval(
                       child: Image.asset(
-                        imagePaths[
-                            index], // Set path of the image in the assets folder
-                        width: 40, // Set width of the image
-                        height: 40, // Set height of the image
+                        imagePaths[index],
+                        width: 40,
+                        height: 40,
                       ),
-                    ), // Example icon // Example icon
-                    trailing: InkWell(
-                      onTap: () async {
-                        final url = spotifyUrls[
-                            index]; // Get the Spotify URL based on the index
-                        if (await canLaunchUrlString(url)) {
-                          await launchUrlString(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
-                      },
-                      child: const Icon(Icons.arrow_forward), // Example icon
                     ),
-                  ),
-                );
-              },
-            ),
-          ),
-
-          // Survivor Stories
-          const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.only(
-                left: 20.0), // Add padding to the left of the title
-// Add padding to the left of the title
-            child: Text(
-              'Survivor Stories',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
-
-          // Survivor Stories
-          const SizedBox(height: 10), // Add space between content and list
-          Expanded(
-            child: ListView.separated(
-              separatorBuilder: (context, index) =>
-                  const SizedBox(height: 10), // Add space between list tiles
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                // Define the titles for each ListTile
-                List<String> titles = [
-                  "3 Breast Cancer Survivors Share Their Stories",
-                  "Mrs. Jumana shares her survival story",
-                  "2 time Breast Cancer Survivor, Ms. Arti shares her story",
-                ];
-
-                List<String> subtitles = [
-                  "Mayo Clinic",
-                  "Manipal Hospitals",
-                  "Sahyadri Hospitals",
-                ];
-
-                List<String> imagePaths = [
-                  "assets/survivor1.jpg",
-                  "assets/survivor2.jpg",
-                  "assets/survivor3.jpg",
-                ];
-
-                List<String> youtubeUrls = [
-                  "https://www.youtube.com/watch?v=q8j_vZRZKx0",
-                  "https://www.youtube.com/watch?v=Pc1vPFhQGPE",
-                  "https://www.youtube.com/watch?v=DxNFq3JngPY",
-                ];
-
-                return Container(
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color(0xFFFFCFDF), // Set background color
-                  ),
-                  child: ListTile(
-                    title: Text(titles[index]), // Set title based on index
-                    subtitle: Text(subtitles[index]),
-                    leading: ClipOval(
-                      child: Image.asset(
-                        imagePaths[
-                            index], // Set path of the image in the assets folder
-                        width: 40, // Set width of the image
-                        height: 40, // Set height of the image
-                      ),
-                    ), // Example icon // Example icon
                     trailing: InkWell(
                       onTap: () async {
-                        final url = youtubeUrls[
-                            index]; // Get the Spotify URL based on the index
+                        final url = Uri.encodeFull(spotifyUrls[index]);
                         if (await canLaunch(url)) {
                           await launch(url);
                         } else {
                           throw 'Could not launch $url';
                         }
                       },
-                      child: const Icon(Icons.arrow_forward), // Example icon
+                      child: const Icon(Icons.arrow_forward),
                     ),
                   ),
                 );
@@ -271,8 +218,8 @@ class Blogs extends StatelessWidget {
         activeIndex: 0,
         activeColor: Colors.white,
         inactiveColor: Colors.white,
-        iconSize: 30, // Adjust the icon size as needed
-        gapLocation: GapLocation.none, // Keep icons centered
+        iconSize: 30,
+        gapLocation: GapLocation.none,
         onTap: (index) {
           switch (index) {
             case 0:

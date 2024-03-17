@@ -77,7 +77,7 @@ class _TickBoxRowState extends State<TickBoxRow> {
             decoration: BoxDecoration(
               color: isCheckedLast
                   ? Color.fromRGBO(206, 25, 106, 1.0)
-                  : const Color(0XFFFFCFDF),
+                  : Color.fromARGB(255, 255, 142, 180),
               borderRadius: BorderRadius.circular(3),
             ),
             child: isCheckedLast
