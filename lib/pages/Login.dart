@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/pages/SignUp.dart';
-import 'package:test_app/pages/Survey.dart';
+// import 'package:test_app/pages/Survey.dart';
+import 'package:test_app/pages/Dashboard.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -46,7 +47,7 @@ class Login extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SurveyPage()),
+                    MaterialPageRoute(builder: (context) => Dashboard()),
                   );
                 },
                 child: const Text('Log In'),
