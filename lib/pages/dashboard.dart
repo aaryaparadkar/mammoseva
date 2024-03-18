@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:test_app/pages/Tickbox.dart';
 import 'package:test_app/pages/blogs.dart';
