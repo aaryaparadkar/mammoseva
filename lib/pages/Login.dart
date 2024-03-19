@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/pages/SignUp.dart';
 // import 'package:test_app/pages/Survey.dart';
-import 'package:test_app/pages/Dashboard.dart';
+import 'package:test_app/pages/dashboard.dart';
 
 void main() {
   runApp(MaterialApp(

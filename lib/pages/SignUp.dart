@@ -1,7 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:test_app/pages/Survey.dart';
-import 'package:test_app/pages/dashboard.dart';
-// import 'package:test_app/pages/login.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MaterialApp(
@@ -17,14 +16,41 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   int _currentStep = 0;
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  String? _startDay;
-  String? _startMonth;
-  String? _endDay;
-  String? _endMonth;
+  String? _startDate;
+  String? _endDate;
   bool _acceptPrivacyPolicy = false;
   bool _isErrorDisplayed = false;
+
+  Future<void> _submitSignUp() async {
+    final url = Uri.parse('https://ap-south-1.aws.neurelo.com/rest/UserFields/__one');
+    final response = await http.post(
+      url,
+      body: json.encode({
+        'name': nameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+        'startDate': '$_startDate',
+        'endDate': '$_endDate',
+        'privacyPolicy': _acceptPrivacyPolicy,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    // Check response status
+    if (response.statusCode == 200) {
+      // Handle success
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Dashboard()),
+      );
+    } else {
+      // Handle error
+      print('Failed to submit sign-up data');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +68,14 @@ class _SignUpState extends State<SignUp> {
             currentStep: _currentStep,
             onStepContinue: () {
               if (_currentStep == 0) {
-                if (emailController.text.isEmpty ||
-                    passwordController.text.isEmpty) {
+                if (emailController.text.isEmpty || passwordController.text.isEmpty) {
                   setState(() {
                     _isErrorDisplayed = true;
                   });
                   return;
                 }
               } else if (_currentStep == 1) {
-                if (_startDay == null ||
-                    _startMonth == null ||
-                    _endDay == null ||
-                    _endMonth == null) {
+                if (_startDate == null || _endDate == null ) {
                   setState(() {
                     _isErrorDisplayed = true;
                   });
@@ -73,12 +95,7 @@ class _SignUpState extends State<SignUp> {
                 if (_currentStep < 2) {
                   _currentStep++;
                 } else {
-                  // Perform sign-up process
-                  // For demonstration purposes, navigate to survey page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Dashboard()),
-                  );
+                  _submitSignUp(); // Call function to submit sign-up data
                 }
               });
             },
@@ -92,9 +109,17 @@ class _SignUpState extends State<SignUp> {
             },
             steps: <Step>[
               Step(
-                title: Text('Email & Password'),
+                title: Text('Credentials'),
                 content: Column(
                   children: [
+                    TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Name',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
                     TextField(
                       controller: emailController,
                       decoration: InputDecoration(
@@ -113,14 +138,13 @@ class _SignUpState extends State<SignUp> {
                     ),
                     if (_isErrorDisplayed && (emailController.text.isEmpty || passwordController.text.isEmpty))
                       Text(
-                        'Both email and password are required',
+                        'All fields are required',
                         style: TextStyle(color: Colors.red),
                       ),
                   ],
                 ),
                 isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 0 ? StepState.complete : StepState.disabled,
+                state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
               ),
               Step(
                 title: Text('Period Dates'),
@@ -131,11 +155,11 @@ class _SignUpState extends State<SignUp> {
                         Expanded(
                           child: TextField(
                             onChanged: (value) {
-                              _startDay = value;
+                              _startDate = value;
                             },
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Start Day',
+                              labelText: 'Start Date (YYYY-MM-DD)',
                               border: OutlineInputBorder(),
                             ),
                           ),
@@ -144,52 +168,18 @@ class _SignUpState extends State<SignUp> {
                         Expanded(
                           child: TextField(
                             onChanged: (value) {
-                              _startMonth = value;
+                              _endDate = value;
                             },
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Start Month',
+                              labelText: 'End Date (YYYY-MM-DD)',
                               border: OutlineInputBorder(),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 16.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            onChanged: (value) {
-                              _endDay = value;
-                            },
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              labelText: 'End Day',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 16.0),
-                        Expanded(
-                          child: TextField(
-                            onChanged: (value) {
-                              _endMonth = value;
-                            },
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              labelText: 'End Month',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (_isErrorDisplayed &&
-                        (_startDay == null ||
-                            _startMonth == null ||
-                            _endDay == null ||
-                            _endMonth == null))
+                    if (_isErrorDisplayed && (_startDate == null || _endDate == null ))
                       Text(
                         'Both start and end dates are required',
                         style: TextStyle(color: Colors.red),
@@ -197,8 +187,7 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
                 isActive: _currentStep >= 1,
-                state:
-                    _currentStep >= 1 ? StepState.complete : StepState.disabled,
+                state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
               ),
               Step(
                 title: Text('Privacy Policy'),
@@ -221,14 +210,26 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
                 isActive: _currentStep >= 2,
-                state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
+                state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
               ),
             ],
           ),
         ),
       ),
-      
+    );
+  }
+}
+
+class Dashboard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+      ),
+      body: Center(
+        child: Text('Welcome to the Dashboard!'),
+      ),
     );
   }
 }
