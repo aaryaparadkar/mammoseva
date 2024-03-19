@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:test_app/pages/dashboard.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -32,8 +33,8 @@ class _SignUpState extends State<SignUp> {
         'name': nameController.text,
         'email': emailController.text,
         'password': passwordController.text,
-        'startDate': '$_startDate',
-        'endDate': '$_endDate',
+        'start_date': '$_startDate',
+        'end_date': '$_endDate',
         'privacyPolicy': _acceptPrivacyPolicy,
       }),
       headers: {'Content-Type': 'application/json'},
@@ -220,16 +221,16 @@ class _SignUpState extends State<SignUp> {
   }
 }
 
-class Dashboard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
-      body: Center(
-        child: Text('Welcome to the Dashboard!'),
-      ),
-    );
-  }
-}
+// class Dashboard extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Dashboard'),
+//       ),
+//       body: Center(
+//         child: Text('Welcome to the Dashboard!'),
+//       ),
+//     );
+//   }
+// }
