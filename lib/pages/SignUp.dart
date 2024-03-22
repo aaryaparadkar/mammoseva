@@ -49,7 +49,10 @@ class _SignUpState extends State<SignUp> {
       );
     } else {
       // Handle error
-      print('Failed to submit sign-up data');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Dashboard()),
+      );
     }
   }
 
