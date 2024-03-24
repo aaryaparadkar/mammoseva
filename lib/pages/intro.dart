@@ -26,7 +26,7 @@ class Intro extends StatelessWidget {
                   width: 300, // Set the width of the image
                   height: 300,
                   child: const Text(
-                    'orem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit tristique venenatis. Suspendisse efficitur um l',
+                    'Welcome to Mammoseva!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14.0,
