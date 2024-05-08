@@ -1,7 +1,7 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:test_app/pages/Tickbox.dart';
 import 'package:test_app/pages/blogs.dart';
+import 'package:test_app/pages/gov_schemes.dart';
 import 'package:test_app/pages/profile.dart';
 import 'package:test_app/pages/self_exam.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
@@ -14,14 +14,21 @@ class Dashboard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 10),
+          // Text widget for "Already started? click here"
+          const Text(
+            'Already started? click here',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+          ),
+          const SizedBox(height: 10),
+          // Add two buttons here
+          const SizedBox(height: 10),
           TickBoxRow(),
-          // Add the TickBoxRow here
           Center(
             child: Container(
               padding: const EdgeInsets.all(80.0),
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
-                color: const Color(0XFFFFCFDF), // Background color
+                color: const Color(0XFFFFCFDF),
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: [
                   BoxShadow(
@@ -43,9 +50,10 @@ class Dashboard extends StatelessWidget {
                   const Text(
                     'Periods incoming:5 days',
                     style: TextStyle(
-                        fontSize: 18,
-                        color: Color.fromRGBO(206, 25, 106, 1.0), // CE196A
-                        fontWeight: FontWeight.bold),
+                      fontSize: 18,
+                      color: Color.fromRGBO(206, 25, 106, 1.0),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -56,26 +64,46 @@ class Dashboard extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color.fromRGBO(206, 25, 106, 1.0), // CE196A
+              color: Color.fromRGBO(206, 25, 106, 1.0),
             ),
           ),
-          const Text(
-            'Already started? click here',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-          ),
-          const SizedBox(height: 10), // Add some space between texts
-          const SizedBox(
-              height: 10), // Add some space between text and carousel
+          const SizedBox(height: 10),
+          const SizedBox(height: 10),
+          ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GovScheme()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all(
+                      Colors.pink, // Set the background color here
+                    ),
+                    foregroundColor: MaterialStateProperty.all(
+                      Colors.white, // Set the text color here
+                    ),
+                  ),
+                  child: const Text(
+                    'Government Scheme',
+                  ),
+                ),
+          const SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: SelfExamination(),
-            // Display the SelfExamination widget directly
           ),
         ],
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         backgroundColor: const Color(0XFFFF55AB),
         icons: [Icons.book, Icons.home, Icons.person],
-        activeIndex: 1, // Set active index to 1 (Home icon)
+        activeIndex: 1,
         activeColor: Colors.white,
         inactiveColor: Colors.white,
         iconSize: 30,

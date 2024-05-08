@@ -163,7 +163,7 @@ class _SignUpState extends State<SignUp> {
                             },
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Start Date (YYYY-MM-DD)',
+                              labelText: 'Start Date (DD)',
                               border: OutlineInputBorder(),
                             ),
                           ),
@@ -176,7 +176,7 @@ class _SignUpState extends State<SignUp> {
                             },
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'End Date (YYYY-MM-DD)',
+                              labelText: 'End Date (DD)',
                               border: OutlineInputBorder(),
                             ),
                           ),
