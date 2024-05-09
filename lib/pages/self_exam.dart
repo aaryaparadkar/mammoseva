@@ -37,6 +37,7 @@ class SelfExamination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(253, 225, 229, 1), // Background color
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

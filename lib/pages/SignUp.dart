@@ -26,7 +26,8 @@ class _SignUpState extends State<SignUp> {
   bool _isErrorDisplayed = false;
 
   Future<void> _submitSignUp() async {
-    final url = Uri.parse('https://ap-south-1.aws.neurelo.com/rest/UserFields/__one');
+    final url =
+        Uri.parse('https://ap-south-1.aws.neurelo.com/rest/UserFields/__one');
     final response = await http.post(
       url,
       body: json.encode({
@@ -72,14 +73,15 @@ class _SignUpState extends State<SignUp> {
             currentStep: _currentStep,
             onStepContinue: () {
               if (_currentStep == 0) {
-                if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+                if (emailController.text.isEmpty ||
+                    passwordController.text.isEmpty) {
                   setState(() {
                     _isErrorDisplayed = true;
                   });
                   return;
                 }
               } else if (_currentStep == 1) {
-                if (_startDate == null || _endDate == null ) {
+                if (_startDate == null || _endDate == null) {
                   setState(() {
                     _isErrorDisplayed = true;
                   });
@@ -140,7 +142,9 @@ class _SignUpState extends State<SignUp> {
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    if (_isErrorDisplayed && (emailController.text.isEmpty || passwordController.text.isEmpty))
+                    if (_isErrorDisplayed &&
+                        (emailController.text.isEmpty ||
+                            passwordController.text.isEmpty))
                       Text(
                         'All fields are required',
                         style: TextStyle(color: Colors.red),
@@ -148,7 +152,8 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
                 isActive: _currentStep >= 0,
-                state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
+                state:
+                    _currentStep >= 0 ? StepState.complete : StepState.disabled,
               ),
               Step(
                 title: Text('Period Dates'),
@@ -183,7 +188,8 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ],
                     ),
-                    if (_isErrorDisplayed && (_startDate == null || _endDate == null ))
+                    if (_isErrorDisplayed &&
+                        (_startDate == null || _endDate == null))
                       Text(
                         'Both start and end dates are required',
                         style: TextStyle(color: Colors.red),
@@ -191,7 +197,8 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
                 isActive: _currentStep >= 1,
-                state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
+                state:
+                    _currentStep >= 1 ? StepState.complete : StepState.disabled,
               ),
               Step(
                 title: Text('Privacy Policy'),
@@ -214,7 +221,8 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
                 isActive: _currentStep >= 2,
-                state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
+                state:
+                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
               ),
             ],
           ),
