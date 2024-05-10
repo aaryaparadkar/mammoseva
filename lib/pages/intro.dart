@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/pages/LangSelection.dart';
 import 'package:test_app/pages/SignUp.dart';
 import 'package:test_app/pages/dashboard.dart';
+// import 'package:test_app/pages/dashboard.dart';
 
 class Intro extends StatelessWidget {
   @override
@@ -38,7 +40,7 @@ class Intro extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUp()),
+                      MaterialPageRoute(builder: (context) => LangSelection()),
                     );
                   },
                   style: ButtonStyle(
