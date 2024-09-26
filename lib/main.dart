@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:test_app/pages/InfoDisplay/InfoDisplay.dart';
 import 'pages/intro.dart';
 
 void main() {

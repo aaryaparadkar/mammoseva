@@ -10,7 +10,6 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(253, 225, 229, 1),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -68,14 +67,34 @@ class Dashboard extends StatelessWidget {
               color: Color.fromRGBO(206, 25, 106, 1.0),
             ),
           ),
-          const Text(
-            'Already started? click here',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-          ),
-          const SizedBox(height: 10), // Add some space between texts
-          SizedBox(height: 20), // Add a box with a height of 20
-          const SizedBox(
-              height: 10), // Add some space between text and carousel
+          const SizedBox(height: 10),
+          const SizedBox(height: 10),
+          ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GovScheme()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all(
+                      Colors.pink, // Set the background color here
+                    ),
+                    foregroundColor: MaterialStateProperty.all(
+                      Colors.white, // Set the text color here
+                    ),
+                  ),
+                  child: const Text(
+                    'Government Scheme',
+                  ),
+                ),
+          const SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: SelfExamination(),
           ),
